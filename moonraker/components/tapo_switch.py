@@ -1,4 +1,4 @@
-# Unofficial Moonraker TP-Link Tapo Switch component
+# Moonraker TP-Link Tapo component
 #
 # Copyright (C) 2025 Satoshi Ohba <satoshi.ohba@gmail.com>
 #
@@ -34,8 +34,10 @@ if TYPE_CHECKING:
 class UnofficialPrinterPower:
     def __init__(self, config: ConfigHelper) -> None:
         self.server = config.get_server()
+
         # retrieve existing, or create power component instance
         self.power = self.server.load_component(config, "power")
+
         self.unofficial_devices: Dict[str, PowerDevice] = {}
         prefix_sections = config.get_prefix_sections("tapo_switch")
         logging.info(f"Unofficial power component loading devices: {prefix_sections}")
