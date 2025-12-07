@@ -12,3 +12,7 @@ start_moonraker
 build
 dist
 share
+*.conf
+*.bak
+moonraker.conf
+tapo_switch.py
