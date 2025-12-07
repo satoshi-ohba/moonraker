@@ -1,10 +1,10 @@
-# Unofficial Tapo Switch component
+# Unofficial Moonraker TP-Link Tapo Switch component
 #
 # Copyright (C) 2025 Satoshi Ohba <satoshi.ohba@gmail.com>
 #
 # This file may be distributed under the terms of the GNU GPLv3 license.
 #
-# moonraker/components/power_tapo_switch.py
+# moonraker/components/tapo_switch.py
 #
 # using Mihai Dinculescu's Unofficial Tapo API Client.
 # https://github.com/mihai-dinculescu/tapo
@@ -37,7 +37,7 @@ class UnofficialPrinterPower:
         # retrieve existing, or create power component instance
         self.power = self.server.load_component(config, "power")
         self.unofficial_devices: Dict[str, PowerDevice] = {}
-        prefix_sections = config.get_prefix_sections("tapo")
+        prefix_sections = config.get_prefix_sections("tapo_switch")
         logging.info(f"Unofficial power component loading devices: {prefix_sections}")
         dev_types = {
             "tplink_tapo": TPLinkTapo,
@@ -61,6 +61,7 @@ class UnofficialPrinterPower:
     # power.add_device() must be called from async method
     async def component_init(self) -> None:
         for dev_name, device in self.unofficial_devices.items():
+            # add unofficial PowerDevice instance into the dictionary of the power component.
             await self.power.add_device(dev_name, device)
 
 class TPLinkTapo(PowerDevice):
